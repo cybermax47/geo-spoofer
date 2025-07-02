@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-require('dotenv').config({ path: __dirname + '/.env' });
+require('dotenv').config();
 
 (async () => {
     const latitude = parseFloat(process.env.SPOOF_LAT || "40.7128");
@@ -7,6 +7,7 @@ require('dotenv').config({ path: __dirname + '/.env' });
 
     const browser = await puppeteer.launch({
         headless: true,
+        executablePath: '/usr/bin/chromium',  // force system chromium
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -21,5 +22,5 @@ require('dotenv').config({ path: __dirname + '/.env' });
 
     console.log(`[+] Browser spoofing location to ${latitude}, ${longitude}`);
     await page.goto('https://example.com');
-    await new Promise(() => {});  // Keep running
+    await new Promise(() => {}); // Keep running
 })();
