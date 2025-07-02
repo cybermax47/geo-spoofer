@@ -1,0 +1,15 @@
+[Unit]
+Description=GeoLocation Spoof Daemon
+After=network.target
+
+[Service]
+EnvironmentFile=/home/YOUR_USER/geo-spoofer/.env
+ExecStart=/usr/bin/node /home/YOUR_USER/geo-spoofer/spoof.js
+WorkingDirectory=/home/YOUR_USER/geo-spoofer
+Restart=always
+RestartSec=5
+StandardOutput=append:/home/YOUR_USER/geo-spoofer/logs/geospoof.log
+StandardError=append:/home/YOUR_USER/geo-spoofer/logs/geospoof.err
+
+[Install]
+WantedBy=multi-user.target
